@@ -69,5 +69,35 @@ nilads = {
     "ý": "0123456789abcdef",
     "Ý": code_page,
     "â": " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
-    "Â": "\t \n"
+    "Â": "\t \n",
+    "ê": 10,
+    "Ê": 0,
+    "î": 256,
+    "Î": -1,
 }
+
+
+tokens = []
+for i in code:
+    if i in [*monadiccommands, *dyadiccommands]:
+        tokens.append(i)
+    if i in [*nilads]:
+        if type(nilads[i]) == str:
+            tokens.append("ᐗ" + nilads[i] + "ᐓ")
+        else:
+            tokens.append(nilads[i])
+
+arguments = []
+argumentcount = sys.argv - 2
+argindex = 0
+for token in tokens:
+    if token in [*monadiccommands]:
+        if arguments == [] and argumentcount == 0:
+            arguments.append(monadiccommands[token](0))
+        elif arguments == [] and argumentcount > 0:
+            arguments.append(monadiccommands[token](sys.argv[argindex]))
+            argindex += 1
+            try:sys.argv[argindex]
+            except:argindex = 0
+        elif len(arguments) > 1:
+            arguments.append(monadiccommands[token](arguments[0]))
