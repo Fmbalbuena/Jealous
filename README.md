@@ -1,2 +1,2 @@
 # Jealous
-Jealous golfing language (WIP)
+Jealous golfing language
