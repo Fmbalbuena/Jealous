@@ -2,12 +2,9 @@ import sys
 code_page = "|¬°!1\"2#3$4%5&6/7(8)9=0?'\\¿¡\tq@wertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM¨´+*~{}^`[],.-_:;<>éýúíóáÉÝÚÍÓÁèùìòàÈÙÌÒÀêûî"
 code_page += "ôâÊÛÎÔÂ\nëÿüöïäËÜÖÏÄᐍᐎᐓᐗᎾᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᏔᏕᏖᏗᏘᏙᏚᏛᏜᏝᏞᏟᏠᏡᏢᏣᏤᏥᏦᏧᏨᏩᏪᏫᏬᏭᏮᏯᏰᏱᏲᏳᏴᏵᏸᏹᏺᏻᏼᏽᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑᏒᏓ×ĀāĂăĄąĆćĈĉĊċČčĎaĐ"
 from sympy.ntheory.primetest import isprime as prime_check
-"""
 with open(sys.argv[1], 'rb') as file:
     code = file.read()
     code = "".join(code_page[i] for i in code)
-"""
-code = "ᐗHello, World!"
 # Golfing language interpreter
 lines = code.split("\n")
 arguments = sys.argv[2:]
