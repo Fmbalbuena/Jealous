@@ -1,7 +1,6 @@
 import sys
 code_page = "|¬°!1\"2#3$4%5&6/7(8)9=0?'\\¿¡\tq@wertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM¨´+*~{}^`[],.-_:;<>éýúíóáÉÝÚÍÓÁèùìòàÈÙÌÒÀêûî"
 code_page += "ôâÊÛÎÔÂ\nëÿüöïäËÜÖÏÄᐍᐎᐓᐗᎾᚁᚂᚃᚄᚅᚆᚇᚈᚉᚊᚋᚌᚍᚎᚏᏔᏕᏖᏗᏘᏙᏚᏛᏜᏝᏞᏟᏠᏡᏢᏣᏤᏥᏦᏧᏨᏩᏪᏫᏬᏭᏮᏯᏰᏱᏲᏳᏴᏵᏸᏹᏺᏻᏼᏽᎳᎴᎵᎶᎷᎸᎹᎺᎻᎼᎽᎿᏀᏁᏂᏃᏄᏅᏆᏇᏈᏉᏊᏋᏌᏍᏎᏏᏐᏑᏒᏓ×ĀāĂăĄąĆćĈĉĊċČčĎaĐ"
-i=""
 from sympy.ntheory.primetest import isprime as prime_check
 with open(sys.argv[1], 'rb') as file:
     code = file.read()
@@ -9,6 +8,7 @@ with open(sys.argv[1], 'rb') as file:
 # Golfing language interpreter
 lines = code.split("\n")
 arguments = sys.argv[2:]
+from math import gcd, lcm
 dyadiccommands = {
     "×": lambda x, y: x * y,
     "Ꮎ": lambda x, y: x / y,
@@ -18,6 +18,24 @@ dyadiccommands = {
     "#": lambda x, y: x ** y,
     "\\": lambda x, y: x // y,
     "\t": lambda x, y: x ** (1 / y),
+    "a": lambda x, y: x.join(y),
+    "b": lambda x, y: x.count(y),
+    "c": lambda x, y: x.find(y),
+    "d": lambda x, y: x.index(y),
+    "e": lambda x, y: x[y],
+    "f": lambda x, y: gcd(x, y),
+    "g": lambda x, y: [x, y],
+    "h": lambda x, y: lcm(x, y),
+    "i": lambda x, y: x.replace(y, ""),
+    "j": lambda x, y: x.split(y),
+    "k": lambda x, y: x.strip(y),
+    "l": lambda x, y: x.rstrip(y),
+    "m": lambda x, y: x.lstrip(y),
+    "n": lambda x, y: x,
+    "ñ": lambda x, y: y,
+    "o": lambda x, y: x,
+
+
 }
 from math import factorial
 import math
@@ -52,8 +70,60 @@ monadiccommands = {
     "Z": lambda x: [len(x) for x in range(x)],
     "@": lambda x: prime_check(x),
     "-": lambda x: -(x - 1),
+    "ᚁ": lambda x: x.isupper(),
+    "ᚂ": lambda x: x.islower(),
+    "ᚃ": lambda x: x.isnumeric(),
+    "ᚄ": lambda x: x.isalpha(),
+    "ᚅ": lambda x: x.isalnum(),
     "Ꮤ": lambda x: x.replace(" ", "").replace("\t", "").replace("\n", ""),
-    "Ꮥ": lambda x: x.replace(" ", "").replace("\t", "").replace("\n", "").upper(),
+    "Ꮥ": lambda x: x[-1],
+    "Ꮦ": lambda x: [x],
+    "Ꮧ": lambda x: x.conjugate(),
+    "Ꮨ": lambda x: chr(x),
+    "Ꮩ": lambda x: ord(x),
+}
+monadsdefaulttype = { # unused until [AI STARTS] is implemented
+    "!": int,
+    "A": str,
+    "B": str,
+    "C": str,
+    "D": str,
+    "E": int,
+    "F": float,
+    "G": list,
+    "H": float,
+    "I": int,
+    "J": int,
+    "K": float,
+    "L": int,
+    "M": int,
+    "N": int,
+    "Ñ": int,
+    "O": int,
+    "P": str,
+    "Q": str,
+    "R": str,
+    "S": str,
+    "T": str,
+    "U": int,
+    "V": int,
+    "W": int,
+    "X": int,
+    "Y": int,
+    "Z": int,
+    "@": int,
+    "-": int,
+    "ᚁ": str,
+    "ᚂ": str,
+    "ᚃ": str,
+    "ᚄ": str,
+    "ᚅ": str,
+    "Ꮤ": list,
+    "Ꮥ": list,
+    "Ꮦ": list,
+    "Ꮧ": int,
+    "Ꮨ": int,
+    "Ꮩ": chr,
 }
 nilads = {
     "á": "abcdefghijklmnopqrstuvwxyz",
@@ -76,21 +146,65 @@ nilads = {
     "Î": -1,
 }
 
+def Fizzbuzz():
+    # Fizzbuzz
+    global variable
+    variable = ""
+    for i in range(1, 101):
+        if i % 3 == 0 and i % 5 == 0:
+            variable += "FizzBuzz\n"
+        elif i % 3 == 0:
+            variable += "Fizz\n"
+        elif i % 5 == 0:
+            variable += "Buzz\n"
+        else:
+            variable += str(i) + "\n"
+
+extendedNilads = {
+    "k": {
+        "A": "qwertyuiopasdfghjklñzxcvbnm",
+        "B": "QWERTYUIOPASDFGHJKLÑZXCVBNM",
+        "C": ":)",
+        "D": ":D",
+        "E": ":P",
+        "F": Fizzbuzz(),
+        "G": ":O",
+        "H": "Hello, World!",
+        "I": "UwU",
+        "J": "\n".join(map(str, [i for i in range(1, 100)]))
+    }
+}
+
 
 tokens = []
+Read = True
 for i in code:
+    if not Read:
+        if i == "ᐓ":
+            Read = True
+            continue
+        continue
     if i in [*monadiccommands, *dyadiccommands]:
         tokens.append(i)
     if i in [*nilads]:
         if type(nilads[i]) == str:
-            tokens.append("ᐗ" + nilads[i] + "ᐓ")
+            tokens.append("ᐗ" + nilads[i])
         else:
             tokens.append(nilads[i])
-
+    if i == "ᐗ":
+        # read until next "ᐓ" if there is one else implicitly read until end of line
+        if "ᐓ" in code[code.index(i) + 1:]:
+            tokens.append("ᐗ" + code[code.index(i) + 1:code.index("ᐓ")])
+        else:
+            tokens.append("ᐗ" + code[code.index(i) + 1:])
+        # Continue until next "ᐓ"
+        Read = False
 arguments = []
-argumentcount = sys.argv - 2
-argindex = 0
-for token in tokens:
+argumentcount = len(sys.argv) - 1
+argindex = 1
+tokenindex = 0
+while True:
+    token = tokens[tokenindex]
     if token in [*monadiccommands]:
         if arguments == [] and argumentcount == 0:
             arguments.append(monadiccommands[token](0))
@@ -98,6 +212,32 @@ for token in tokens:
             arguments.append(monadiccommands[token](sys.argv[argindex]))
             argindex += 1
             try:sys.argv[argindex]
-            except:argindex = 0
-        elif len(arguments) > 1:
-            arguments.append(monadiccommands[token](arguments[0]))
+            except:argindex = 1
+        elif len(arguments) > 0:
+            arguments.append(monadiccommands[token](arguments.pop()))
+    if token in [*dyadiccommands]:
+        # Take next token as argument if is nilad
+        tokenindex += 1
+        if tokens[tokenindex][0] == "ᐗ":
+            arguments.append(tokens[tokenindex][1:])
+            arguments.append(dyadiccommands[token](arguments.pop(), arguments.pop()))
+        else:
+            if len(arguments) == 1:
+                if argumentcount == 0:
+                    arguments.append(dyadiccommands[token](arguments.pop(), 0))
+                elif argumentcount > 0:
+                    arguments.append(dyadiccommands[token](arguments.pop(), sys.argv[argindex]))
+                    argindex += 1
+                    try:sys.argv[argindex]
+                    except:argindex = 1
+            elif len(arguments) == 2:
+                arguments.append(dyadiccommands[token](arguments.pop(), arguments.pop()))
+    if token[0] == "ᐗ":
+        arguments.append(token[1:])
+    tokenindex += 1
+    if tokenindex >= len(tokens):
+        break
+if len(arguments) != 0:
+    print(end = arguments[0])
+else:
+    print(arguments.join("\n"))
