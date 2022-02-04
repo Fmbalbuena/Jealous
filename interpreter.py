@@ -51,7 +51,7 @@ monadiccommands = {
     "H": lambda x: x / 2,
     "I": lambda x: x + 1,
     "J": lambda x: 1j * x,
-    "K": lambda x: 2 * x,
+    "K": lambda x: x * 2,
     "L": lambda x: len(x),
     "M": lambda x: math.ceil(x),
     "N": lambda x: -x,
